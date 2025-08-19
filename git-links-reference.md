@@ -17,11 +17,7 @@ This document provides exact GitHub URLs with line numbers for all operational a
 **File**: `vandenberg-config.json`  
 **Priority**: 🚨 CRITICAL - Service Discovery Foundation
 
-- [`zookeeper-1.eng.airtime.com:2181`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/vandenberg-config.json#L193)
-- [`zookeeper-2.eng.airtime.com:2181`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/vandenberg-config.json#L194)
-- [`zookeeper-3.eng.airtime.com:2181`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/vandenberg-config.json#L195)
-- [`zookeeper-4.eng.airtime.com:2181`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/vandenberg-config.json#L196)
-- [`zookeeper-5.eng.airtime.com:2181`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/vandenberg-config.json#L197)
+- [`"disco-servers": "zookeeper-1.eng.airtime.com:2181, zookeeper-2.eng.airtime.com:2181, zookeeper-3.eng.airtime.com:2181, zookeeper-4.eng.airtime.com:2181, zookeeper-5.eng.airtime.com:2181"`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/vandenberg-config.json#L16)
 
 **Change To**: Replace `eng.airtime.com` with `eng.cantina.com`
 
@@ -30,7 +26,7 @@ This document provides exact GitHub URLs with line numbers for all operational a
 **File**: `merced/libs/base/constants.mjs`  
 **Priority**: 🚨 CRITICAL - Authentication Foundation
 
-- [`EXTERNAL_URL = 'https://merced.airtime.com:443'`](https://github.com/airtimemedia/merced/blob/5488b383338f22ddb65daa0e67a014b9b6ac47c8/merced/libs/base/constants.mjs#L30)
+- [`export let EXTERNAL_URL = 'https://merced.airtime.com:443';`](https://github.com/airtimemedia/merced/blob/5488b383338f22ddb65daa0e67a014b9b6ac47c8/merced/libs/base/constants.mjs#L4)
 
 **Change To**: `EXTERNAL_URL = 'https://merced.eng.cantina.com:443'` (Phase 2) → `'https://merced.cantina.com:443'` (Phase 4)
 
@@ -39,7 +35,7 @@ This document provides exact GitHub URLs with line numbers for all operational a
 **File**: `yosemite/libs/config/app-config.mjs`  
 **Priority**: 🚨 CRITICAL - Platform Gateway
 
-- [`DOMAIN_NAME: 'platform.airtime.com:443'`](https://github.com/airtimemedia/yosemite/blob/02323c26ce2b6e00a7d0889bce9abbba38d4c767/yosemite/libs/config/app-config.mjs#L35)
+- [`DOMAIN_NAME: 'platform.airtime.com:443',`](https://github.com/airtimemedia/yosemite/blob/02323c26ce2b6e00a7d0889bce9abbba38d4c767/yosemite/libs/config/app-config.mjs#L42)
 
 **Change To**: `DOMAIN_NAME: 'platform.eng.cantina.com:443'` (Phase 2) → `'platform.cantina.com:443'` (Phase 4)
 
@@ -48,14 +44,14 @@ This document provides exact GitHub URLs with line numbers for all operational a
 **File**: `automation-test.sh`  
 **Priority**: ⚡ HIGH - Deployment Automation
 
-- [`MERCED_HOST="merced-${NODE_NAME}.eng.airtime.com"`](https://github.com/airtimemedia/merced/blob/5488b383338f22ddb65daa0e67a014b9b6ac47c8/automation-test.sh#L40)
+- [`export MERCED_HOST="merced-${NODE_NAME}.eng.airtime.com"`](https://github.com/airtimemedia/merced/blob/5488b383338f22ddb65daa0e67a014b9b6ac47c8/automation-test.sh#L57)
 
 **Repository**: jim.tokens/yosemite  
 **File**: `automation-test.sh`  
 **Priority**: ⚡ HIGH - Deployment Automation
 
-- [`YOSEMITE_HOST="yosemite-${NODE_NAME}.eng.airtime.com"`](https://github.com/airtimemedia/yosemite/blob/02323c26ce2b6e00a7d0889bce9abbba38d4c767/automation-test.sh#L43)
-- [`merced-${NODE_NAME}.eng.airtime.com:443`](https://github.com/airtimemedia/yosemite/blob/02323c26ce2b6e00a7d0889bce9abbba38d4c767/automation-test.sh#L45)
+- [`export YOSEMITE_HOST="yosemite-${NODE_NAME}.eng.airtime.com"`](https://github.com/airtimemedia/yosemite/blob/02323c26ce2b6e00a7d0889bce9abbba38d4c767/automation-test.sh#L57)
+- [`npm config set YOSEMITE_REGRESSIONS:CONFIG_TOKEN_SERVER_HOST_PORT "merced-${NODE_NAME}.eng.airtime.com:443"`](https://github.com/airtimemedia/yosemite/blob/02323c26ce2b6e00a7d0889bce9abbba38d4c767/automation-test.sh#L64)
 
 **Change To**: Replace `eng.airtime.com` with `eng.cantina.com`
 
@@ -82,11 +78,7 @@ This document provides exact GitHub URLs with line numbers for all operational a
 **File**: `config.json`  
 **Priority**: 🚨 CRITICAL - Service Discovery Foundation
 
-- [`zookeeper-1.stage.airtime.com:2181`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/config.json#L22)
-- [`zookeeper-2.stage.airtime.com:2181`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/config.json#L23)
-- [`zookeeper-3.stage.airtime.com:2181`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/config.json#L24)
-- [`zookeeper-4.stage.airtime.com:2181`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/config.json#L25)
-- [`zookeeper-5.stage.airtime.com:2181`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/config.json#L26)
+- [`"disco-servers": "zookeeper-1.stage.airtime.com:2181, zookeeper-2.stage.airtime.com:2181, zookeeper-3.stage.airtime.com:2181, zookeeper-4.stage.airtime.com:2181, zookeeper-5.stage.airtime.com:2181"`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/config.json#L15)
 
 **Change To**: Replace `stage.airtime.com` with `stage.cantina.com`
 
@@ -95,9 +87,10 @@ This document provides exact GitHub URLs with line numbers for all operational a
 **File**: `server-allocator/integration_tests/configs/cpu_allocator_test/config.json`  
 **Priority**: ⚡ HIGH - Test Infrastructure
 
-- [`"zookeeper-1.stage.airtime.com:2181"`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/server-allocator/integration_tests/configs/cpu_allocator_test/config.json#L52)
+- [`"#disco-servers": "zookeeper-1.stage.airtime.com:2181, zookeeper-2.stage.airtime.com:2181, zookeeper-3.stage.airtime.com:2181"`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/server-allocator/integration_tests/configs/cpu_allocator_test/config.json#L11)
+- [`"disco-servers": "zookeeper-1-automation1.eng.airtime.com:2181"`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/server-allocator/integration_tests/configs/cpu_allocator_test/config.json#L12)
 
-**Change To**: `"zookeeper-1.stage.cantina.com:2181"`
+**Change To**: Replace `airtime.com` with `cantina.com`
 
 ---
 
@@ -108,8 +101,16 @@ This document provides exact GitHub URLs with line numbers for all operational a
 **File**: `server-allocator/integration_tests/lib/eureka.js`  
 **Priority**: 📋 MEDIUM - Integration Testing
 
-- [`"tecate-legacy://tecate.airtime.com/12345678"`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/server-allocator/integration_tests/lib/eureka.js#L62)
-- [`"vandenberg-i-0cc1319df496e648c-us-west-2.eng.airtime.com"`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/server-allocator/integration_tests/lib/eureka.js#L64)
+- [`ipAddr + '&stream-url=tecate-legacy://tecate.airtime.com/12345678';`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/server-allocator/integration_tests/lib/eureka.js#L46)
+- [`// "server": "vandenberg-i-0cc1319df496e648c-us-west-2.eng.airtime.com",`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/server-allocator/integration_tests/lib/eureka.js#L24)
+
+**Repository**: workspace.eureka/eureka  
+**File**: `server-allocator/integration_tests/tests/all-allocator-test.js`  
+**Priority**: 📋 MEDIUM - Integration Testing
+
+- [`var ZOO_NODE  = 'zookeeper-1-' + process.env['NODE_NAME'] + '.eng.airtime.com';`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/server-allocator/integration_tests/tests/all-allocator-test.js#L25)
+- [`if (VANDENBERG) UUT = 'http://vandenberg-allocator-' + process.env['NODE_NAME'] + '.eng.airtime.com:8192';`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/server-allocator/integration_tests/tests/all-allocator-test.js#L116)
+- [`url: UUT + '/allocate-subscribe?stream-url=tecate-legacy://tecate.airtime.com/12345678'`](https://github.com/airtimemedia/eureka/blob/9542db245df8459af9734bc215680a02659ad0c9/server-allocator/integration_tests/tests/all-allocator-test.js#L615)
 
 **Change To**: Replace `airtime.com` with `cantina.com`
 
@@ -118,9 +119,9 @@ This document provides exact GitHub URLs with line numbers for all operational a
 **File**: `automation-test/bin/run-automation-local.sh`  
 **Priority**: 📋 MEDIUM - Development Tools
 
-- [`merced-i-123456.airtime.com:8259`](https://github.com/airtimemedia/yosemite/blob/02323c26ce2b6e00a7d0889bce9abbba38d4c767/automation-test/bin/run-automation-local.sh#L69)
+- [`#YOSEMITE_TOKEN_SERVER_HOST_PORT=merced-i-123456.airtime.com:8259 \`](https://github.com/airtimemedia/yosemite/blob/02323c26ce2b6e00a7d0889bce9abbba38d4c767/automation-test/bin/run-automation-local.sh#L8)
 
-**Change To**: `merced-i-123456.cantina.com:8259`
+**Change To**: `merced-i-123456.cantina.com:8259` (uncomment and update when used)
 
 ---
 
@@ -131,13 +132,13 @@ This document provides exact GitHub URLs with line numbers for all operational a
 **File**: `yosemite/libs/migrate-db/README.md`  
 **Priority**: 📝 LOW - Documentation
 
-- [Documentation with airtime.com references](https://github.com/airtimemedia/yosemite/blob/02323c26ce2b6e00a7d0889bce9abbba38d4c767/yosemite/libs/migrate-db/README.md#L75)
+- [`\`yosemite/libs/migrate-db/quick-test.sh https://yosemite.eng.airtime.com <your dev portal token file> <test customer id>\``](https://github.com/airtimemedia/yosemite/blob/02323c26ce2b6e00a7d0889bce9abbba38d4c767/yosemite/libs/migrate-db/README.md#L116)
 
 **Repository**: jim.tokens/yosemite  
 **File**: `yosemite/libs/migrate-db/quick-test.sh`  
 **Priority**: 📝 LOW - Documentation Scripts
 
-- [`https://yosemite.eng.airtime.com`](https://github.com/airtimemedia/yosemite/blob/02323c26ce2b6e00a7d0889bce9abbba38d4c767/yosemite/libs/migrate-db/quick-test.sh#L77)
+- [`echo 'Ex: https://yosemite.eng.airtime.com /some/where/devportal.token "big customer"'`](https://github.com/airtimemedia/yosemite/blob/02323c26ce2b6e00a7d0889bce9abbba38d4c767/yosemite/libs/migrate-db/quick-test.sh#L7)
 
 **Change To**: `https://yosemite.eng.cantina.com`
 
@@ -193,23 +194,36 @@ This document provides exact GitHub URLs with line numbers for all operational a
 
 ## Summary by Migration Phase
 
-### Phase 2: Engineering Environment (14 URLs)
-🚨 **CRITICAL**: 8 URLs (ZooKeeper, Token Service, Platform, Automation)  
-⚡ **HIGH**: 4 URLs (Automation Scripts)  
-📋 **MEDIUM**: 2 URLs (Test Configurations)
+### Phase 2: Engineering Environment 
+🚨 **CRITICAL**: 
+- 1 URL - ZooKeeper Configuration (vandenberg-config.json line 16)
+- 1 URL - Token Service External URL (constants.mjs line 4)
+- 1 URL - Platform Domain (app-config.mjs line 42)
 
-### Phase 3: Staging Environment (7 URLs)
-🚨 **CRITICAL**: 6 URLs (ZooKeeper Configuration)  
-⚡ **HIGH**: 1 URL (Integration Test Config)
+⚡ **HIGH**: 
+- 3 URLs - Automation Scripts (automation-test.sh lines 57, 64)
 
-### Phase 4: Production Environment (2 URLs)
-🚨 **CRITICAL**: Update Phase 2 references from `.eng.` to production
+📋 **MEDIUM**:
+- Test configurations (various test files)
 
-### Phase 5: Application Services (3 URLs)
-📋 **MEDIUM**: 3 URLs (Integration Tests, Development Scripts)
+### Phase 3: Staging Environment
+🚨 **CRITICAL**: 
+- 1 URL - ZooKeeper Configuration (config.json line 15)
 
-### Phase 6: Documentation (2+ URLs)
-📝 **LOW**: 2+ URLs (Documentation, Scripts)
+⚡ **HIGH**: 
+- 2 URLs - Integration Test Config (cpu_allocator_test/config.json lines 11-12)
+
+### Phase 4: Production Environment
+🚨 **CRITICAL**: Update Phase 2 references from `.eng.` to production domains
+
+### Phase 5: Application Services
+📋 **MEDIUM**: 
+- 6+ URLs - Integration Tests (eureka.js, all-allocator-test.js)
+- 1 URL - Development Scripts (run-automation-local.sh line 8)
+
+### Phase 6: Documentation
+📝 **LOW**: 
+- 2 URLs - Documentation (README.md line 116, quick-test.sh line 7)
 
 ---
 
