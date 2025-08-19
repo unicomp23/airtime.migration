@@ -1,0 +1,143 @@
+<svg width="1000" height="800" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: bold 18px sans-serif; text-anchor: middle; }
+    .subtitle { font: 14px sans-serif; text-anchor: middle; fill: #666; }
+    .service { font: 12px sans-serif; text-anchor: middle; fill: #333; }
+    .domain { font: 10px sans-serif; text-anchor: middle; fill: #666; }
+    .status { font: 10px sans-serif; text-anchor: middle; }
+    .active { fill: #4CAF50; }
+    .migrated { fill: #2196F3; }
+    .critical { fill: #FF5722; }
+    .bridge { fill: #FF9800; }
+    .arrow { stroke: #666; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    .critical-arrow { stroke: #FF5722; stroke-width: 3; fill: none; marker-end: url(#arrowhead-red); }
+  </style>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#FF5722"/>
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="500" y="30" class="title">Phase 4: Production Platform Services Migration</text>
+  <text x="500" y="50" class="subtitle">CRITICAL: Migrate core production infrastructure</text>
+  
+  <!-- Completed Environments -->
+  <text x="150" y="90" class="title" fill="#2196F3">Completed Environments</text>
+  
+  <rect x="50" y="110" width="200" height="60" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" rx="5"/>
+  <text x="150" y="135" class="service">Engineering</text>
+  <text x="150" y="150" class="domain">eng.cantina.com - NATIVE</text>
+  <text x="150" y="165" class="status migrated">✅ COMPLETE</text>
+  
+  <rect x="50" y="180" width="200" height="60" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" rx="5"/>
+  <text x="150" y="205" class="service">Staging</text>
+  <text x="150" y="220" class="domain">stage.cantina.com - NATIVE</text>
+  <text x="150" y="235" class="status migrated">✅ COMPLETE</text>
+  
+  <!-- Production Migration Steps - CRITICAL -->
+  <text x="500" y="90" class="title" fill="#FF5722">Production Migration - CRITICAL PHASE</text>
+  
+  <!-- Step 1: Platform Service -->
+  <rect x="300" y="110" width="400" height="90" fill="#FFEBEE" stroke="#FF5722" stroke-width="3" rx="5"/>
+  <text x="500" y="130" class="service" fill="#FF5722">Step 1: Platform Service Domain Update</text>
+  <text x="500" y="145" class="domain">File: jim.tokens/yosemite/libs/config/app-config.mjs</text>
+  <text x="500" y="160" class="domain">FROM: DOMAIN_NAME: 'platform.airtime.com:443'</text>
+  <text x="500" y="175" class="domain">TO: DOMAIN_NAME: 'platform.cantina.com:443'</text>
+  <text x="500" y="190" class="domain">⚠️ CRITICAL: Authentication gateway for all services</text>
+  <text x="500" y="205" class="status critical">HIGH RISK</text>
+  
+  <!-- Step 2: Token Services -->
+  <rect x="300" y="210" width="400" height="90" fill="#FFEBEE" stroke="#FF5722" stroke-width="3" rx="5"/>
+  <text x="500" y="230" class="service" fill="#FF5722">Step 2: Production Token Services</text>
+  <text x="500" y="245" class="domain">Merced: https://merced.airtime.com → https://merced.cantina.com</text>
+  <text x="500" y="260" class="domain">Yosemite: Update production endpoint references</text>
+  <text x="500" y="275" class="domain">⚠️ CRITICAL: JWT token generation and validation</text>
+  <text x="500" y="290" class="domain">Must maintain authentication continuity</text>
+  <text x="500" y="305" class="status critical">HIGH RISK</text>
+  
+  <!-- Current Production State -->
+  <text x="850" y="90" class="title" fill="#FF9800">Current Production State</text>
+  
+  <rect x="750" y="110" width="200" height="120" fill="#FFF3E0" stroke="#FF9800" stroke-width="2" rx="5"/>
+  <text x="850" y="130" class="service">Before Migration</text>
+  <text x="850" y="145" class="domain">platform.airtime.com</text>
+  <text x="850" y="155" class="domain">+ platform.cantina.com CNAME</text>
+  <text x="850" y="170" class="domain">merced.airtime.com</text>
+  <text x="850" y="180" class="domain">+ merced.cantina.com CNAME</text>
+  <text x="850" y="195" class="domain">yosemite.airtime.com</text>
+  <text x="850" y="205" class="domain">+ yosemite.cantina.com CNAME</text>
+  <text x="850" y="225" class="status bridge">BRIDGED</text>
+  
+  <!-- Service Dependencies During Migration -->
+  <text x="500" y="340" class="title">Critical Service Dependencies</text>
+  
+  <!-- Authentication Flow -->
+  <rect x="100" y="360" width="250" height="80" fill="#FFEBEE" stroke="#FF5722" stroke-width="2" rx="5"/>
+  <text x="225" y="380" class="service">Authentication Flow</text>
+  <text x="225" y="395" class="domain">Client → Platform → Token Service</text>
+  <text x="225" y="410" class="domain">ALL must use same domain</text>
+  <text x="225" y="425" class="domain">⚠️ Break = Auth failure</text>
+  <text x="225" y="440" class="status critical">CRITICAL</text>
+  
+  <!-- Inter-Service Communication -->
+  <rect x="375" y="360" width="250" height="80" fill="#FFEBEE" stroke="#FF5722" stroke-width="2" rx="5"/>
+  <text x="500" y="380" class="service">Inter-Service Communication</text>
+  <text x="500" y="395" class="domain">Service-to-service calls</text>
+  <text x="500" y="410" class="domain">Token validation endpoints</text>
+  <text x="500" y="425" class="domain">⚠️ Must remain functional</text>
+  <text x="500" y="440" class="status critical">CRITICAL</text>
+  
+  <!-- External Integrations -->
+  <rect x="650" y="360" width="250" height="80" fill="#FFF3E0" stroke="#FF9800" stroke-width="2" rx="5"/>
+  <text x="775" y="380" class="service">External Integrations</text>
+  <text x="775" y="395" class="domain">Third-party services</text>
+  <text x="775" y="410" class="domain">API callbacks</text>
+  <text x="775" y="425" class="domain">May need coordination</text>
+  <text x="775" y="440" class="status bridge">MONITOR</text>
+  
+  <!-- Critical dependency arrows -->
+  <path d="M 350 400 L 375 400" class="critical-arrow"/>
+  <path d="M 625 400 L 650 400" class="critical-arrow"/>
+  
+  <!-- Migration Strategy -->
+  <text x="500" y="480" class="title">Zero-Downtime Migration Strategy</text>
+  
+  <rect x="50" y="500" width="900" height="140" fill="#F5F5F5" stroke="#CCC" stroke-width="1" rx="5"/>
+  
+  <text x="70" y="520" class="service" fill="#FF5722">🚨 CRITICAL DEPLOYMENT SEQUENCE:</text>
+  <text x="70" y="540" class="service">1️⃣ Deploy Platform service with cantina.com endpoint FIRST</text>
+  <text x="70" y="555" class="service">2️⃣ Immediately deploy Token services (Merced + Yosemite)</text>
+  <text x="70" y="570" class="service">3️⃣ Validate authentication flows within 5 minutes</text>
+  <text x="70" y="585" class="service">4️⃣ Monitor error rates continuously during deployment</text>
+  <text x="70" y="600" class="service">5️⃣ Keep rollback scripts ready for immediate reversion</text>
+  
+  <text x="70" y="620" class="service" fill="#4CAF50">✅ SUCCESS CRITERIA:</text>
+  <text x="500" y="620" class="domain">Authentication success rate > 99.5%</text>
+  <text x="500" y="635" class="domain">Token validation working, Service discovery functional</text>
+  
+  <!-- Rollback Plan -->
+  <text x="500" y="680" class="title">Emergency Rollback Plan</text>
+  
+  <rect x="100" y="700" width="350" height="80" fill="#FFEBEE" stroke="#FF5722" stroke-width="2" rx="5"/>
+  <text x="275" y="720" class="service">Immediate Rollback (&lt; 5 minutes)</text>
+  <text x="275" y="735" class="domain">🔄 Revert Platform service config</text>
+  <text x="275" y="750" class="domain">🔄 Revert Token service configs</text>
+  <text x="275" y="765" class="domain">🔄 Services fall back to CNAME</text>
+  <text x="275" y="780" class="status critical">READY</text>
+  
+  <rect x="500" y="700" width="350" height="80" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" rx="5"/>
+  <text x="675" y="720" class="service">Monitoring During Migration</text>
+  <text x="675" y="735" class="domain">📊 Real-time error rate tracking</text>
+  <text x="675" y="750" class="domain">📊 Authentication success monitoring</text>
+  <text x="675" y="765" class="domain">📊 Service health dashboards</text>
+  <text x="675" y="780" class="status migrated">ACTIVE</text>
+  
+  <!-- Risk Level -->
+  <text x="500" y="810" class="subtitle" fill="#FF5722">Risk Level: HIGH - Production authentication infrastructure migration</text>
+</svg>

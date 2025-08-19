@@ -1,0 +1,138 @@
+<svg width="1000" height="850" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: bold 18px sans-serif; text-anchor: middle; }
+    .subtitle { font: 14px sans-serif; text-anchor: middle; fill: #666; }
+    .service { font: 12px sans-serif; text-anchor: middle; fill: #333; }
+    .domain { font: 10px sans-serif; text-anchor: middle; fill: #666; }
+    .status { font: 10px sans-serif; text-anchor: middle; }
+    .active { fill: #4CAF50; }
+    .migrated { fill: #2196F3; }
+    .complete { fill: #4CAF50; }
+    .cleanup { fill: #9C27B0; }
+    .arrow { stroke: #666; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    .cleanup-arrow { stroke: #9C27B0; stroke-width: 3; fill: none; marker-end: url(#arrowhead-purple); }
+  </style>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+    <marker id="arrowhead-purple" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#9C27B0"/>
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="500" y="30" class="title">Phases 5 &amp; 6: Application Services + DNS Cleanup</text>
+  <text x="500" y="50" class="subtitle">Final migration steps and complete transition to cantina.com</text>
+  
+  <!-- Phase 5: Application Services -->
+  <text x="200" y="90" class="title" fill="#2196F3">Phase 5: Application Services</text>
+  
+  <rect x="50" y="110" width="300" height="120" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" rx="5"/>
+  <text x="200" y="130" class="service">Remaining Application Services</text>
+  <text x="200" y="145" class="domain">📁 Tecate service references</text>
+  <text x="200" y="160" class="domain">📁 Integration test configurations</text>
+  <text x="200" y="175" class="domain">📁 Development automation scripts</text>
+  <text x="200" y="190" class="domain">📁 Documentation references</text>
+  <text x="200" y="205" class="domain">📁 Local development configs</text>
+  <text x="200" y="220" class="status migrated">LOW RISK - PARALLEL</text>
+  
+  <!-- Phase 6: DNS Cleanup -->
+  <text x="700" y="90" class="title" fill="#9C27B0">Phase 6: DNS Cleanup</text>
+  
+  <rect x="550" y="110" width="300" height="120" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2" rx="5"/>
+  <text x="700" y="130" class="service">DNS Bridge Removal</text>
+  <text x="700" y="145" class="domain">🗑️ Remove CNAME records</text>
+  <text x="700" y="160" class="domain">🔄 Update DNS to native cantina.com</text>
+  <text x="700" y="175" class="domain">🔍 Final airtime.com reference scan</text>
+  <text x="700" y="190" class="domain">✅ Complete cantina.com transition</text>
+  <text x="700" y="205" class="domain">🧹 Infrastructure cleanup</text>
+  <text x="700" y="220" class="status cleanup">FINAL CLEANUP</text>
+  
+  <!-- Current Architecture State -->
+  <text x="500" y="270" class="title">Current Architecture After Phase 4</text>
+  
+  <!-- All Environments Status -->
+  <rect x="100" y="290" width="200" height="80" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="5"/>
+  <text x="200" y="310" class="service">Engineering</text>
+  <text x="200" y="325" class="domain">eng.cantina.com</text>
+  <text x="200" y="340" class="domain">NATIVE</text>
+  <text x="200" y="355" class="domain">No CNAME dependency</text>
+  <text x="200" y="370" class="status complete">COMPLETE ✅</text>
+  
+  <rect x="350" y="290" width="200" height="80" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="5"/>
+  <text x="450" y="310" class="service">Staging</text>
+  <text x="450" y="325" class="domain">stage.cantina.com</text>
+  <text x="450" y="340" class="domain">NATIVE</text>
+  <text x="450" y="355" class="domain">No CNAME dependency</text>
+  <text x="450" y="370" class="status complete">COMPLETE ✅</text>
+  
+  <rect x="600" y="290" width="200" height="80" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="5"/>
+  <text x="700" y="310" class="service">Production</text>
+  <text x="700" y="325" class="domain">cantina.com</text>
+  <text x="700" y="340" class="domain">NATIVE</text>
+  <text x="700" y="355" class="domain">Platform + Token services</text>
+  <text x="700" y="370" class="status complete">COMPLETE ✅</text>
+  
+  <!-- Phase 5 Application Updates -->
+  <text x="500" y="410" class="title">Phase 5: Remaining Application Files</text>
+  
+  <rect x="50" y="430" width="900" height="120" fill="#F5F5F5" stroke="#CCC" stroke-width="1" rx="5"/>
+  
+  <text x="70" y="450" class="service">📁 Integration Test References:</text>
+  <text x="70" y="465" class="domain">/workspace.eureka/eureka/server-allocator/integration_tests/lib/eureka.js</text>
+  <text x="70" y="480" class="domain">Update: tecate-legacy://tecate.airtime.com → tecate.cantina.com</text>
+  
+  <text x="70" y="500" class="service">📁 Development Scripts:</text>
+  <text x="70" y="515" class="domain">/jim.tokens/yosemite/automation-test/bin/run-automation-local.sh</text>
+  <text x="70" y="530" class="domain">Update: merced-i-123456.airtime.com → merced-i-123456.cantina.com</text>
+  
+  <text x="70" y="545" class="service">📁 Documentation Files:</text>
+  <text x="500" y="545" class="domain">Update README files, migration guides, and development docs</text>
+  
+  <!-- Phase 6 DNS Cleanup Steps -->
+  <text x="500" y="580" class="title">Phase 6: DNS Cleanup &amp; Final Transition</text>
+  
+  <!-- Before Cleanup -->
+  <rect x="100" y="600" width="250" height="100" fill="#FFF3E0" stroke="#FF9800" stroke-width="2" rx="5"/>
+  <text x="225" y="620" class="service">BEFORE Cleanup</text>
+  <text x="225" y="635" class="domain">cantina.com services NATIVE</text>
+  <text x="225" y="650" class="domain">airtime.com CNAMEs exist</text>
+  <text x="225" y="665" class="domain">Both domains work</text>
+  <text x="225" y="680" class="domain">Legacy references remain</text>
+  <text x="225" y="695" class="status" fill="#FF9800">BRIDGED STATE</text>
+  
+  <!-- Cleanup Arrow -->
+  <path d="M 350 650 L 450 650" class="cleanup-arrow"/>
+  <text x="400" y="640" class="service" fill="#9C27B0">CLEANUP</text>
+  
+  <!-- After Cleanup -->
+  <rect x="500" y="600" width="250" height="100" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2" rx="5"/>
+  <text x="625" y="620" class="service">AFTER Cleanup</text>
+  <text x="625" y="635" class="domain">cantina.com ONLY</text>
+  <text x="625" y="650" class="domain">No CNAME dependencies</text>
+  <text x="625" y="665" class="domain">All references updated</text>
+  <text x="625" y="680" class="domain">Clean architecture</text>
+  <text x="625" y="695" class="status cleanup">NATIVE ONLY</text>
+  
+  <!-- Final State Verification -->
+  <rect x="50" y="720" width="900" height="100" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="5"/>
+  <text x="500" y="740" class="title" fill="#4CAF50">Final Migration Success Criteria</text>
+  
+  <text x="70" y="760" class="service">✅ All services accessible only via cantina.com domains</text>
+  <text x="70" y="775" class="service">✅ No remaining airtime.com references in codebase</text>
+  <text x="70" y="790" class="service">✅ No DNS CNAME dependencies on airtime.com</text>
+  <text x="70" y="805" class="service">✅ Authentication, service discovery, and inter-service communication functional</text>
+  
+  <text x="500" y="760" class="service">✅ All environments (eng, stage, prod) native on cantina.com</text>
+  <text x="500" y="775" class="service">✅ Monitoring and alerting updated</text>
+  <text x="500" y="790" class="service">✅ Documentation reflects new domain</text>
+  <text x="500" y="805" class="service">✅ Zero dependency on airtime.com infrastructure</text>
+  
+  <!-- Timeline and Risk -->
+  <text x="200" y="840" class="subtitle" fill="#2196F3">Phase 5 Duration: 1-2 days (Low Risk)</text>
+  <text x="500" y="840" class="subtitle" fill="#9C27B0">Phase 6 Duration: 1 day (Medium Risk - Final cutover)</text>
+  <text x="800" y="840" class="subtitle" fill="#4CAF50">Total Migration: COMPLETE</text>
+</svg>

@@ -1,0 +1,118 @@
+<svg width="900" height="650" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: bold 18px sans-serif; text-anchor: middle; }
+    .subtitle { font: 14px sans-serif; text-anchor: middle; fill: #666; }
+    .service { font: 12px sans-serif; text-anchor: middle; fill: #333; }
+    .domain { font: 10px sans-serif; text-anchor: middle; fill: #666; }
+    .status { font: 10px sans-serif; text-anchor: middle; }
+    .active { fill: #4CAF50; }
+    .bridge { fill: #FF9800; }
+    .arrow { stroke: #666; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    .cname-arrow { stroke: #FF9800; stroke-width: 3; fill: none; marker-end: url(#arrowhead-orange); stroke-dasharray: 8,4; }
+  </style>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+    <marker id="arrowhead-orange" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#FF9800"/>
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="450" y="30" class="title">Phase 1: DNS Bridge Setup</text>
+  <text x="450" y="50" class="subtitle">Create dual-domain accessibility using CNAME records</text>
+  
+  <!-- airtime.com Services (Left) -->
+  <text x="200" y="90" class="title" fill="#4CAF50">airtime.com (Original)</text>
+  
+  <!-- ZooKeeper -->
+  <rect x="50" y="110" width="300" height="70" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="5"/>
+  <text x="200" y="130" class="service">ZooKeeper Clusters</text>
+  <text x="200" y="145" class="domain">zookeeper-{1-5}.stage.airtime.com:2181</text>
+  <text x="200" y="160" class="domain">zookeeper-{1-5}.eng.airtime.com:2181</text>
+  <text x="200" y="175" class="status active">ACTIVE</text>
+  
+  <!-- Platform -->
+  <rect x="50" y="200" width="300" height="50" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="5"/>
+  <text x="200" y="225" class="service">Platform Service</text>
+  <text x="200" y="240" class="domain">platform.airtime.com:443</text>
+  <text x="200" y="255" class="status active">ACTIVE</text>
+  
+  <!-- Token Services -->
+  <rect x="50" y="270" width="300" height="70" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="5"/>
+  <text x="200" y="290" class="service">Token Services</text>
+  <text x="200" y="305" class="domain">merced.airtime.com:443</text>
+  <text x="200" y="320" class="domain">yosemite.airtime.com:443</text>
+  <text x="200" y="335" class="status active">ACTIVE</text>
+  
+  <!-- cantina.com Bridge (Right) -->
+  <text x="700" y="90" class="title" fill="#FF9800">cantina.com (CNAME Bridge)</text>
+  
+  <!-- ZooKeeper CNAMEs -->
+  <rect x="550" y="110" width="300" height="70" fill="#FFF3E0" stroke="#FF9800" stroke-width="2" rx="5"/>
+  <text x="700" y="130" class="service">ZooKeeper CNAMEs</text>
+  <text x="700" y="145" class="domain">zookeeper-{1-5}.stage.cantina.com</text>
+  <text x="700" y="160" class="domain">zookeeper-{1-5}.eng.cantina.com</text>
+  <text x="700" y="175" class="status bridge">CNAME → airtime.com</text>
+  
+  <!-- Platform CNAME -->
+  <rect x="550" y="200" width="300" height="50" fill="#FFF3E0" stroke="#FF9800" stroke-width="2" rx="5"/>
+  <text x="700" y="225" class="service">Platform CNAME</text>
+  <text x="700" y="240" class="domain">platform.cantina.com</text>
+  <text x="700" y="255" class="status bridge">CNAME → airtime.com</text>
+  
+  <!-- Token Service CNAMEs -->
+  <rect x="550" y="270" width="300" height="70" fill="#FFF3E0" stroke="#FF9800" stroke-width="2" rx="5"/>
+  <text x="700" y="290" class="service">Token Service CNAMEs</text>
+  <text x="700" y="305" class="domain">merced.cantina.com</text>
+  <text x="700" y="320" class="domain">yosemite.cantina.com</text>
+  <text x="700" y="335" class="status bridge">CNAME → airtime.com</text>
+  
+  <!-- CNAME arrows -->
+  <path d="M 550 145 L 350 145" class="cname-arrow"/>
+  <text x="450" y="140" class="domain" fill="#FF9800">CNAME</text>
+  
+  <path d="M 550 225 L 350 225" class="cname-arrow"/>
+  <text x="450" y="220" class="domain" fill="#FF9800">CNAME</text>
+  
+  <path d="M 550 305 L 350 305" class="cname-arrow"/>
+  <text x="450" y="300" class="domain" fill="#FF9800">CNAME</text>
+  
+  <!-- Service Dependencies -->
+  <text x="450" y="380" class="title">Service Dependencies During Bridge Phase</text>
+  
+  <!-- Eureka Service -->
+  <rect x="200" y="400" width="200" height="60" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" rx="5"/>
+  <text x="300" y="420" class="service">Eureka Service Discovery</text>
+  <text x="300" y="435" class="domain">Uses ZooKeeper endpoints</text>
+  <text x="300" y="450" class="status active">UNCHANGED</text>
+  
+  <!-- Client Applications -->
+  <rect x="500" y="400" width="200" height="60" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" rx="5"/>
+  <text x="600" y="420" class="service">Client Applications</text>
+  <text x="600" y="435" class="domain">Can use either domain</text>
+  <text x="600" y="450" class="status bridge">DUAL ACCESS</text>
+  
+  <!-- Dependency arrows -->
+  <path d="M 300 400 L 200 180" class="arrow"/>
+  <text x="220" y="290" class="domain" transform="rotate(-45 220 290)">depends on</text>
+  
+  <path d="M 550 430 L 400 430" class="arrow"/>
+  <text x="475" y="425" class="domain">can access</text>
+  
+  <!-- Benefits box -->
+  <rect x="50" y="490" width="800" height="120" fill="#F5F5F5" stroke="#CCC" stroke-width="1" rx="5"/>
+  <text x="450" y="510" class="title">Phase 1 Benefits</text>
+  
+  <text x="70" y="535" class="service">✅ Zero downtime - existing services continue unchanged</text>
+  <text x="70" y="550" class="service">✅ Both domains functional - clients can use either</text>
+  <text x="70" y="565" class="service">✅ Easy rollback - simply remove CNAME records</text>
+  <text x="70" y="580" class="service">✅ Testing capability - validate cantina.com before migration</text>
+  <text x="70" y="595" class="service">⚠️  DNS propagation time - allow 24-48 hours for global propagation</text>
+  
+  <!-- Risk indicator -->
+  <text x="450" y="640" class="subtitle" fill="#4CAF50">Risk Level: LOW - Services remain on airtime.com, cantina.com provides alternative access</text>
+</svg>

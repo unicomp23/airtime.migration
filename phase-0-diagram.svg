@@ -1,0 +1,89 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: bold 18px sans-serif; text-anchor: middle; }
+    .subtitle { font: 14px sans-serif; text-anchor: middle; fill: #666; }
+    .service { font: 12px sans-serif; text-anchor: middle; fill: #333; }
+    .domain { font: 11px sans-serif; text-anchor: middle; fill: #666; }
+    .status { font: 10px sans-serif; text-anchor: middle; }
+    .active { fill: #4CAF50; }
+    .inactive { fill: #FFC107; }
+    .prep { fill: #2196F3; }
+  </style>
+  
+  <!-- Title -->
+  <text x="400" y="30" class="title">Phase 0: Pre-Migration Setup</text>
+  <text x="400" y="50" class="subtitle">Prepare cantina.com infrastructure (No impact on airtime.com)</text>
+  
+  <!-- Current State - airtime.com (Left Side) -->
+  <text x="150" y="90" class="title" fill="#4CAF50">Current State - airtime.com</text>
+  
+  <!-- ZooKeeper Cluster -->
+  <rect x="50" y="110" width="200" height="80" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="5"/>
+  <text x="150" y="130" class="service">ZooKeeper Cluster</text>
+  <text x="150" y="145" class="domain">zookeeper-{1-5}.stage.airtime.com</text>
+  <text x="150" y="160" class="domain">zookeeper-{1-5}.eng.airtime.com</text>
+  <text x="150" y="175" class="status active">ACTIVE</text>
+  
+  <!-- Eureka Service Discovery -->
+  <rect x="50" y="210" width="200" height="60" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="5"/>
+  <text x="150" y="235" class="service">Eureka Service Discovery</text>
+  <text x="150" y="250" class="domain">workspace.eureka</text>
+  <text x="150" y="265" class="status active">ACTIVE</text>
+  
+  <!-- Platform Services -->
+  <rect x="50" y="290" width="200" height="60" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="5"/>
+  <text x="150" y="315" class="service">Platform Services</text>
+  <text x="150" y="330" class="domain">platform.airtime.com</text>
+  <text x="150" y="345" class="status active">ACTIVE</text>
+  
+  <!-- Token Services -->
+  <rect x="50" y="370" width="200" height="80" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="5"/>
+  <text x="150" y="390" class="service">Token Services</text>
+  <text x="150" y="405" class="domain">merced.airtime.com</text>
+  <text x="150" y="420" class="domain">yosemite.airtime.com</text>
+  <text x="150" y="435" class="status active">ACTIVE</text>
+  
+  <!-- Preparation Activities - cantina.com (Right Side) -->
+  <text x="550" y="90" class="title" fill="#2196F3">Preparation - cantina.com</text>
+  
+  <!-- DNS Setup -->
+  <rect x="450" y="110" width="200" height="80" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" rx="5" stroke-dasharray="5,5"/>
+  <text x="550" y="130" class="service">DNS Infrastructure</text>
+  <text x="550" y="145" class="domain">cantina.com domain setup</text>
+  <text x="550" y="160" class="domain">Nameserver configuration</text>
+  <text x="550" y="175" class="status prep">PREPARING</text>
+  
+  <!-- SSL Certificates -->
+  <rect x="450" y="210" width="200" height="60" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" rx="5" stroke-dasharray="5,5"/>
+  <text x="550" y="235" class="service">SSL Certificates</text>
+  <text x="550" y="250" class="domain">*.cantina.com certificates</text>
+  <text x="550" y="265" class="status prep">PREPARING</text>
+  
+  <!-- Monitoring Setup -->
+  <rect x="450" y="290" width="200" height="60" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" rx="5" stroke-dasharray="5,5"/>
+  <text x="550" y="315" class="service">Monitoring Setup</text>
+  <text x="550" y="330" class="domain">Dual-domain monitoring</text>
+  <text x="550" y="345" class="status prep">PREPARING</text>
+  
+  <!-- Baseline Documentation -->
+  <rect x="450" y="370" width="200" height="60" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" rx="5" stroke-dasharray="5,5"/>
+  <text x="550" y="395" class="service">Baseline Documentation</text>
+  <text x="550" y="410" class="domain">Current metrics & configs</text>
+  <text x="550" y="425" class="status prep">PREPARING</text>
+  
+  <!-- Legend -->
+  <rect x="50" y="480" width="700" height="100" fill="#F5F5F5" stroke="#CCC" stroke-width="1" rx="5"/>
+  <text x="400" y="500" class="title">Legend</text>
+  
+  <circle cx="150" cy="520" r="8" class="active"/>
+  <text x="170" y="525" class="service">Active Services (No Changes)</text>
+  
+  <circle cx="150" cy="545" r="8" class="prep"/>
+  <text x="170" y="550" class="service">Preparation Activities (Zero Impact)</text>
+  
+  <rect x="400" y="512" width="20" height="16" fill="none" stroke="#2196F3" stroke-width="2" stroke-dasharray="3,3"/>
+  <text x="430" y="525" class="service">Future Infrastructure</text>
+  
+  <!-- Risk Level -->
+  <text x="400" y="570" class="subtitle" fill="#4CAF50">Risk Level: LOW - No impact on existing services</text>
+</svg>

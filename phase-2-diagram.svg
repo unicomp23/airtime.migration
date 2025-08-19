@@ -1,0 +1,121 @@
+<svg width="950" height="700" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: bold 18px sans-serif; text-anchor: middle; }
+    .subtitle { font: 14px sans-serif; text-anchor: middle; fill: #666; }
+    .service { font: 12px sans-serif; text-anchor: middle; fill: #333; }
+    .domain { font: 10px sans-serif; text-anchor: middle; fill: #666; }
+    .status { font: 10px sans-serif; text-anchor: middle; }
+    .active { fill: #4CAF50; }
+    .migrated { fill: #2196F3; }
+    .bridge { fill: #FF9800; }
+    .inactive { fill: #999; }
+    .arrow { stroke: #666; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    .migrate-arrow { stroke: #2196F3; stroke-width: 3; fill: none; marker-end: url(#arrowhead-blue); }
+  </style>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+    <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2196F3"/>
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="475" y="30" class="title">Phase 2: Engineering Environment Migration</text>
+  <text x="475" y="50" class="subtitle">Migrate eng.cantina.com to native (no CNAME dependency)</text>
+  
+  <!-- Staging (Unchanged) -->
+  <text x="150" y="90" class="title" fill="#4CAF50">Staging (Unchanged)</text>
+  
+  <rect x="50" y="110" width="200" height="60" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="5"/>
+  <text x="150" y="135" class="service">ZooKeeper Staging</text>
+  <text x="150" y="150" class="domain">stage.airtime.com</text>
+  <text x="150" y="165" class="status active">ACTIVE</text>
+  
+  <rect x="50" y="180" width="200" height="60" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="5"/>
+  <text x="150" y="205" class="service">Platform/Tokens</text>
+  <text x="150" y="220" class="domain">airtime.com + CNAME</text>
+  <text x="150" y="235" class="status bridge">BRIDGED</text>
+  
+  <!-- Engineering Migration Steps -->
+  <text x="475" y="90" class="title" fill="#2196F3">Engineering Migration Steps</text>
+  
+  <!-- Step 1: ZooKeeper Config -->
+  <rect x="300" y="110" width="350" height="80" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" rx="5"/>
+  <text x="475" y="130" class="service">Step 1: Update ZooKeeper Configuration</text>
+  <text x="475" y="145" class="domain">File: workspace.eureka/eureka/vandenberg-config.json</text>
+  <text x="475" y="160" class="domain">FROM: zookeeper-{1-5}.eng.airtime.com:2181</text>
+  <text x="475" y="175" class="domain">TO: zookeeper-{1-5}.eng.cantina.com:2181</text>
+  <text x="475" y="190" class="status migrated">MIGRATED</text>
+  
+  <!-- Step 2: Eureka Service -->
+  <rect x="300" y="200" width="350" height="80" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" rx="5"/>
+  <text x="475" y="220" class="service">Step 2: Update Eureka Service Discovery</text>
+  <text x="475" y="235" class="domain">Deploy updated Eureka with new ZooKeeper endpoints</text>
+  <text x="475" y="250" class="domain">Validate service registration working</text>
+  <text x="475" y="265" class="domain">Test service discovery functionality</text>
+  <text x="475" y="280" class="status migrated">MIGRATED</text>
+  
+  <!-- Step 3: Token Services -->
+  <rect x="300" y="290" width="350" height="80" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" rx="5"/>
+  <text x="475" y="310" class="service">Step 3: Token Services Engineering</text>
+  <text x="475" y="325" class="domain">File: jim.tokens/merced/libs/base/constants.mjs</text>
+  <text x="475" y="340" class="domain">FROM: https://merced.airtime.com:443</text>
+  <text x="475" y="355" class="domain">TO: https://merced.eng.cantina.com:443</text>
+  <text x="475" y="370" class="status migrated">MIGRATED</text>
+  
+  <!-- Production (Untouched) -->
+  <text x="800" y="90" class="title" fill="#666">Production (Untouched)</text>
+  
+  <rect x="700" y="110" width="200" height="120" fill="#F5F5F5" stroke="#CCC" stroke-width="1" rx="5"/>
+  <text x="800" y="135" class="service">Production Services</text>
+  <text x="800" y="150" class="domain">platform.airtime.com</text>
+  <text x="800" y="165" class="domain">merced.airtime.com</text>
+  <text x="800" y="180" class="domain">yosemite.airtime.com</text>
+  <text x="800" y="195" class="domain">+ CNAME bridges</text>
+  <text x="800" y="210" class="status inactive">UNCHANGED</text>
+  
+  <!-- Migration Flow -->
+  <text x="475" y="420" class="title">Migration Dependencies & Flow</text>
+  
+  <!-- Before State -->
+  <rect x="100" y="440" width="200" height="80" fill="#FFF3E0" stroke="#FF9800" stroke-width="2" rx="5"/>
+  <text x="200" y="460" class="service">BEFORE</text>
+  <text x="200" y="475" class="domain">eng.cantina.com</text>
+  <text x="200" y="490" class="domain">CNAME →</text>
+  <text x="200" y="505" class="domain">eng.airtime.com</text>
+  <text x="200" y="520" class="status bridge">BRIDGED</text>
+  
+  <!-- Migration Arrow -->
+  <path d="M 300 480 L 400 480" class="migrate-arrow"/>
+  <text x="350" y="470" class="service" fill="#2196F3">MIGRATE</text>
+  
+  <!-- After State -->
+  <rect x="450" y="440" width="200" height="80" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" rx="5"/>
+  <text x="550" y="460" class="service">AFTER</text>
+  <text x="550" y="475" class="domain">eng.cantina.com</text>
+  <text x="550" y="490" class="domain">NATIVE</text>
+  <text x="550" y="505" class="domain">No CNAME dependency</text>
+  <text x="550" y="520" class="status migrated">MIGRATED</text>
+  
+  <!-- Rollback Path -->
+  <path d="M 400 520 L 300 520" class="arrow" stroke="#FF5722" stroke-dasharray="4,4"/>
+  <text x="350" y="535" class="service" fill="#FF5722">ROLLBACK</text>
+  
+  <!-- Validation Steps -->
+  <rect x="50" y="540" width="850" height="120" fill="#F5F5F5" stroke="#CCC" stroke-width="1" rx="5"/>
+  <text x="475" y="560" class="title">Validation Checklist</text>
+  
+  <text x="70" y="580" class="service">✅ ZooKeeper connectivity via eng.cantina.com endpoints</text>
+  <text x="70" y="595" class="service">✅ Eureka service discovery functional</text>
+  <text x="70" y="610" class="service">✅ Token services issuing valid tokens</text>
+  <text x="70" y="625" class="service">✅ Integration tests passing in engineering environment</text>
+  <text x="70" y="640" class="service">✅ No impact on staging or production environments</text>
+  
+  <!-- Risk Assessment -->
+  <text x="475" y="680" class="subtitle" fill="#FF9800">Risk Level: MEDIUM - Engineering environment isolated, easy rollback available</text>
+  <text x="475" y="695" class="subtitle" fill="#2196F3">Success: Engineering fully native on cantina.com, other environments unaffected</text>
+</svg>
