@@ -34,33 +34,92 @@
 
 ### Week 1: Infrastructure Setup
 
-#### Day 1-2: Domain and DNS Setup
+#### Day 1-2: Infrastructure as Code Audit
 ```bash
-# 1. Register cantina.com domain (if not done)
-# 2. Configure DNS nameservers
-# 3. Set up DNS zones
+# Clone infrastructure repositories FIRST
+git clone git@github.com:airtimemedia/media-ansible.git
+git clone git@github.com:airtimemedia/empire-terraform.git
+git clone git@github.com:airtimemedia/empire-terraform-sumologic.git
+git clone git@github.com:yoinc/devops.git
 
-# Create DNS zones using your DNS provider
-# Example using AWS Route53:
-aws route53 create-hosted-zone --name cantina.com --caller-reference $(date +%s)
+# Search for airtime.com references in Terraform
+cd empire-terraform
+grep -r "airtime\.com" . --include="*.tf" --include="*.tfvars"
+terraform state list | grep airtime
 
-# Create subdomains
-# eng.cantina.com
-# stage.cantina.com  
-# platform.cantina.com
-# merced.cantina.com
-# yosemite.cantina.com
+# Search for airtime.com references in Ansible
+cd ../media-ansible
+grep -r "airtime\.com" . --include="*.yml" --include="*.yaml"
+find inventory/ -type f -exec grep -l "airtime\.com" {} \;
 ```
 
-#### Day 3-4: SSL Certificate Generation
+#### Day 3-4: Domain and DNS Setup via Terraform
 ```bash
-# Generate wildcard SSL certificate for *.cantina.com
-# Using Let's Encrypt:
-certbot certonly --manual --preferred-challenges dns \
-  -d "*.cantina.com" -d "cantina.com"
+# Update Terraform configurations for cantina.com
+cd empire-terraform
 
-# Or using your certificate authority
-# Install certificates in your load balancer/CDN
+# Create new Route53 zone configuration
+cat > dns-cantina.tf <<EOF
+resource "aws_route53_zone" "cantina_com" {
+  name = "cantina.com"
+  tags = {
+    Environment = "production"
+    Migration   = "airtime-to-cantina"
+  }
+}
+EOF
+
+# Plan and apply DNS changes
+terraform plan -out=cantina-dns.plan
+terraform apply cantina-dns.plan
+
+# Note the nameservers for domain registrar configuration
+terraform output cantina_nameservers
+```
+
+#### Day 5-6: SSL Certificate Generation via Terraform/ACM
+```bash
+# Add ACM certificate request to Terraform
+cd empire-terraform
+
+cat > acm-cantina.tf <<EOF
+resource "aws_acm_certificate" "cantina_com" {
+  domain_name               = "*.cantina.com"
+  subject_alternative_names = [
+    "cantina.com",
+    "*.eng.cantina.com",
+    "*.stage.cantina.com"
+  ]
+  validation_method = "DNS"
+  
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_route53_record" "cantina_com_validation" {
+  for_each = {
+    for dvo in aws_acm_certificate.cantina_com.domain_validation_options : dvo.domain_name => {
+      name   = dvo.resource_record_name
+      record = dvo.resource_record_value
+      type   = dvo.resource_record_type
+    }
+  }
+  
+  zone_id = aws_route53_zone.cantina_com.zone_id
+  name    = each.value.name
+  type    = each.value.type
+  records = [each.value.record]
+  ttl     = 60
+}
+EOF
+
+# Apply certificate configuration
+terraform plan -out=cantina-acm.plan
+terraform apply cantina-acm.plan
+
+# Wait for certificate validation
+aws acm wait certificate-validated --certificate-arn $(terraform output cantina_cert_arn)
 ```
 
 #### Day 5-7: Monitoring Setup
@@ -107,12 +166,45 @@ certbot certonly --manual --preferred-challenges dns \
 
 ## Phase 1: DNS Bridge Setup (2-3 days)
 
-### Day 1: CNAME Record Creation
+### Day 1: CNAME Record Creation via Terraform
 
-#### Step 1: Create ZooKeeper CNAMEs
+#### Step 1: Create ZooKeeper CNAMEs in Terraform
 ```bash
-# DNS Management Console
-# Add CNAME records:
+# Update Terraform to add CNAME records
+cd empire-terraform
+
+cat > cnames-cantina.tf <<EOF
+# ZooKeeper CNAME records for staging
+resource "aws_route53_record" "zookeeper_stage_cnames" {
+  for_each = toset(["1", "2", "3", "4", "5"])
+  
+  zone_id = aws_route53_zone.cantina_com.zone_id
+  name    = "zookeeper-\${each.value}.stage.cantina.com"
+  type    = "CNAME"
+  ttl     = 300
+  records = ["zookeeper-\${each.value}.stage.airtime.com"]
+}
+
+# ZooKeeper CNAME records for engineering
+resource "aws_route53_record" "zookeeper_eng_cnames" {
+  for_each = toset(["1", "2", "3", "4", "5"])
+  
+  zone_id = aws_route53_zone.cantina_com.zone_id
+  name    = "zookeeper-\${each.value}.eng.cantina.com"
+  type    = "CNAME"
+  ttl     = 300
+  records = ["zookeeper-\${each.value}.eng.airtime.com"]
+}
+EOF
+
+# Apply CNAME configuration
+terraform plan -out=phase1-cnames.plan
+terraform apply phase1-cnames.plan
+```
+
+#### Step 2: Create Service CNAMEs in Terraform
+```bash
+# Add service CNAME records
 
 # Staging Environment
 zookeeper-1.stage.cantina.com    CNAME    zookeeper-1.stage.airtime.com

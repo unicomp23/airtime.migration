@@ -2,11 +2,20 @@
 
 This document provides exact GitHub URLs with line numbers for all operational airtime references that need to be updated during the migration.
 
-## Repository Commit Hashes
+## Application Code Repository Commit Hashes
 - **workspace.eureka/eureka**: `9542db245df8459af9734bc215680a02659ad0c9`
 - **jim.tokens/merced**: `5488b383338f22ddb65daa0e67a014b9b6ac47c8`
 - **jim.tokens/yosemite**: `02323c26ce2b6e00a7d0889bce9abbba38d4c767`
 - **workspace.eureka/pipeline-library**: `44ba4516a5ef09860f73d6e71bb6c52ab64895cc`
+
+## Infrastructure as Code Repositories (Not Yet Analyzed)
+⚠️ **CRITICAL**: The following IaC repositories must be cloned and analyzed for airtime.com references:
+- **airtimemedia/media-ansible**: Ansible playbooks and inventory files
+- **airtimemedia/empire-terraform**: Terraform configurations for AWS infrastructure
+- **airtimemedia/empire-terraform-sumologic**: Monitoring and logging configurations
+- **yoinc/devops**: DevOps scripts and automation tools
+
+See `infrastructure-migration.md` for detailed IaC migration requirements.
 
 ---
 

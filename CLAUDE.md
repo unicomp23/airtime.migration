@@ -12,8 +12,16 @@ This repository contains a **comprehensive zero-downtime migration strategy** to
 - **Strategic Level**: `domain-migration-plan.md`, `incremental-rollout-plan.md` - High-level strategy and phased approach
 - **Execution Level**: `step-by-step-guide.md`, `migration-checklist.md` - Detailed implementation instructions
 - **Technical Reference**: `git-links-reference.md` - Exact GitHub URLs with line numbers for code changes
+- **Infrastructure**: `infrastructure-migration.md` - IaC repositories (Terraform, Ansible) requirements
 - **Safety**: `rollback-procedures.md` - Emergency rollback procedures for each phase
 - **Visual**: `phase-*.svg` - Service dependency diagrams for each migration phase
+
+### Critical Infrastructure Repositories (Not in this repo)
+The migration requires updates to these infrastructure repositories:
+- `airtimemedia/media-ansible` - Ansible playbooks and inventory
+- `airtimemedia/empire-terraform` - AWS infrastructure via Terraform
+- `airtimemedia/empire-terraform-sumologic` - Monitoring configuration
+- `yoinc/devops` - DevOps scripts and tools
 
 ### Migration Flow
 The migration follows a 6-phase approach:
@@ -32,7 +40,30 @@ Platform Gateway (Authentication) ← Token Services (Merced/Yosemite) ← Exter
 
 ## Key Commands
 
-### Analysis and Planning
+### Infrastructure as Code Commands
+```bash
+# Clone infrastructure repositories
+git clone git@github.com:airtimemedia/media-ansible.git
+git clone git@github.com:airtimemedia/empire-terraform.git
+
+# Search for airtime.com in Terraform
+grep -r "airtime\.com" . --include="*.tf" --include="*.tfvars"
+terraform state list | grep airtime
+
+# Search for airtime.com in Ansible
+grep -r "airtime\.com" . --include="*.yml" --include="*.yaml"
+find inventory/ -type f -exec grep -l "airtime\.com" {} \;
+
+# Terraform migration commands
+terraform plan -out=migration.plan
+terraform apply migration.plan
+terraform state backup
+
+# Ansible testing
+ansible-playbook -i inventory --check site.yml
+```
+
+### Application Code Analysis
 ```bash
 # Search for airtime.com references in service repositories
 grep -r "airtime\.com" /path/to/repository/

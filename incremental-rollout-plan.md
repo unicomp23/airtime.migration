@@ -8,10 +8,20 @@ This document provides a safe, incremental migration strategy with zero-downtime
 ### Phase 0: Pre-Migration Setup (1-2 weeks)
 **Goal**: Prepare infrastructure without impacting existing services
 
-#### Tasks:
+#### Infrastructure as Code Preparation:
+- [ ] Clone and audit infrastructure repositories:
+  - [ ] `airtimemedia/media-ansible` - Ansible playbooks
+  - [ ] `airtimemedia/empire-terraform` - Terraform configurations
+  - [ ] `airtimemedia/empire-terraform-sumologic` - Monitoring setup
+  - [ ] `yoinc/devops` - DevOps scripts
+- [ ] Search all IaC repositories for airtime.com references
+- [ ] Document current Terraform state
+- [ ] Backup Ansible inventory files
+
+#### DNS and Certificate Tasks:
 - [ ] Register cantina.com domain
-- [ ] Set up DNS zones and nameservers
-- [ ] Generate SSL certificates for all subdomains
+- [ ] Set up DNS zones and nameservers (via Terraform)
+- [ ] Generate SSL certificates for all subdomains (via Terraform/ACM)
 - [ ] Create monitoring for both domains
 - [ ] Document current service baseline metrics
 
@@ -31,8 +41,18 @@ This document provides a safe, incremental migration strategy with zero-downtime
 #### Strategy:
 Use DNS CNAME records to make services accessible via both domains simultaneously.
 
-#### Tasks:
-- [ ] Create CNAME records:
+#### Infrastructure as Code Tasks:
+- [ ] Update Terraform configurations:
+  - [ ] Create Route53 hosted zone for cantina.com
+  - [ ] Define CNAME records in Terraform
+  - [ ] Request ACM certificates for *.cantina.com
+- [ ] Apply Terraform changes:
+  ```bash
+  terraform plan -out=phase1.plan
+  terraform apply phase1.plan
+  ```
+
+#### DNS Records to Create:
   - `zookeeper-1.stage.cantina.com` → `zookeeper-1.stage.airtime.com`
   - `zookeeper-2.stage.cantina.com` → `zookeeper-2.stage.airtime.com`
   - `zookeeper-{3,4,5}.stage.cantina.com` → corresponding airtime.com hosts

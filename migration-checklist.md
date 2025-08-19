@@ -2,18 +2,34 @@
 
 ## Pre-Migration Setup
 
-### DNS & Infrastructure
+### Infrastructure as Code Audit
+- [ ] Clone infrastructure repositories:
+  - [ ] `git clone git@github.com:airtimemedia/media-ansible.git`
+  - [ ] `git clone git@github.com:airtimemedia/empire-terraform.git`
+  - [ ] `git clone git@github.com:airtimemedia/empire-terraform-sumologic.git`
+  - [ ] `git clone git@github.com:yoinc/devops.git`
+- [ ] Search for airtime.com references in:
+  - [ ] Terraform files (*.tf, *.tfvars)
+  - [ ] Ansible playbooks (*.yml, *.yaml)
+  - [ ] Inventory files
+  - [ ] Jenkins configurations
+- [ ] Document all IaC airtime.com references
+- [ ] Backup current Terraform state
+- [ ] Backup Ansible inventory files
+
+### DNS & Infrastructure (via Terraform)
 - [ ] Purchase/configure cantina.com domain
-- [ ] Set up DNS zones for cantina.com
-- [ ] Create subdomains:
+- [ ] Update Terraform to create cantina.com Route53 hosted zone
+- [ ] Configure DNS zones for cantina.com via Terraform
+- [ ] Create subdomains in Terraform:
   - [ ] eng.cantina.com
   - [ ] stage.cantina.com  
   - [ ] platform.cantina.com
   - [ ] merced.cantina.com
   - [ ] yosemite.cantina.com
-- [ ] Generate SSL certificates for all subdomains
+- [ ] Request SSL certificates via Terraform/ACM
 - [ ] Plan ZooKeeper migration strategy
-- [ ] Set up temporary DNS CNAMEs (if needed)
+- [ ] Define temporary DNS CNAMEs in Terraform
 
 ## Critical Files - MUST UPDATE
 
@@ -85,6 +101,24 @@
 - [ ] `/root/repo/dev/workspace.eureka/eureka/server-allocator/integration_tests/tests/servers-endpoint-test.js`
 - [ ] `/root/repo/dev/workspace.eureka/eureka/server-allocator/tests/test-server-allocator.js`
 
+## Infrastructure as Code Updates
+
+### Terraform Updates
+- [ ] Update Route53 zone configurations
+- [ ] Modify ACM certificate requests
+- [ ] Update ALB/NLB target group rules
+- [ ] Adjust CloudFront distributions
+- [ ] Update S3 bucket policies
+- [ ] Run `terraform plan` before each phase
+- [ ] Keep Terraform state backups
+
+### Ansible Updates
+- [ ] Update inventory/production hosts
+- [ ] Update inventory/staging hosts
+- [ ] Modify group_vars/all.yml domain variables
+- [ ] Update playbook host patterns
+- [ ] Test with `ansible-playbook --check`
+
 ## Deployment & Testing
 
 ### Pre-Deployment Testing
@@ -92,6 +126,8 @@
 - [ ] Test ZooKeeper connectivity with new endpoints
 - [ ] Validate token generation with new domain
 - [ ] Test automation scripts in staging environment
+- [ ] Validate Terraform changes with `terraform plan`
+- [ ] Test Ansible playbooks with `--check` flag
 
 ### Staging Deployment
 - [ ] Deploy to engineering environment first

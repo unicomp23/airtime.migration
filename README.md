@@ -53,6 +53,7 @@ This repository contains a comprehensive **zero-downtime migration strategy** to
 | Document | Purpose |
 |----------|---------|
 | **[github-org-repos.md](github-org-repos.md)** | Complete inventory of all repositories |
+| **[infrastructure-migration.md](infrastructure-migration.md)** | IaC repositories and Terraform/Ansible requirements |
 
 ---
 
@@ -129,8 +130,9 @@ Phase 6: Cleanup   ◄── Phase 5: App Services ◄── Phase 3: Staging
 
 ### **Scope**
 - **Repositories**: 4 GitHub organizations (yoinc, vline, airtimemedia, aircoreio)
-- **Operational References**: 28+ URLs requiring updates
-- **Critical Files**: 22 configuration and service files
+- **Operational References**: 28+ URLs requiring updates in application code
+- **Infrastructure as Code**: 5+ critical IaC repositories (Terraform, Ansible, Jenkins)
+- **Critical Files**: 22 configuration and service files + IaC definitions
 - **Environments**: Engineering, Staging, Production
 
 ### **Timeline**
